@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 # install deps
-RUN yarn install
+RUN yarn install --network-concurrency 1
 
 ENV NODE_ENV production
 
