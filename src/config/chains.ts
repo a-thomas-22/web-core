@@ -14,6 +14,8 @@ type Chains = Record<string, string>
 
 const chains = networks.reduce<Chains>((result, { shortName, chainId }) => {
   result[shortName] = chainId.toString()
+  result['arb-sepolia'] = '421614'
+  result['xai'] = '660279'
   return result
 }, {})
 
