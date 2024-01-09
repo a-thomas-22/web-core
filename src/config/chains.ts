@@ -17,10 +17,6 @@ const chains = networks.reduce<Chains>((result, { shortName, chainId }) => {
   return result
 }, {})
 
-//add chains that are not in the networks list
-chains['arb-sepolia'] = '421614'
-chains['xai'] = '660279'
-
 const ChainLogos = {
   [chains.eth]: '/images/networks/mainnet.svg',
   [chains.bnb]: '/images/networks/bnb.svg',
