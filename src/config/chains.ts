@@ -14,10 +14,12 @@ type Chains = Record<string, string>
 
 const chains = networks.reduce<Chains>((result, { shortName, chainId }) => {
   result[shortName] = chainId.toString()
-  result['arb-sepolia'] = '421614'
-  result['xai'] = '660279'
   return result
 }, {})
+
+//add chains that are not in the networks list
+chains['arb-sepolia'] = '421614'
+chains['xai'] = '660279'
 
 const ChainLogos = {
   [chains.eth]: '/images/networks/mainnet.svg',
@@ -35,6 +37,7 @@ const ChainLogos = {
   [chains.arb1]: '/images/networks/arb.svg',
   [chains.avax]: '/images/networks/avax.svg',
   [chains.sep]: '/images/networks/sep.png',
+  [chains.xai]: '/images/networks/xai.png',
 }
 
 export const getChainLogo = (chainId: string) => {
