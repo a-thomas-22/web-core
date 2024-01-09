@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
+import debounce from 'lodash/debounce'
 
 import { useSafeApps } from '@/hooks/safe-apps/useSafeApps'
 import SafeAppsSDKLink from '@/components/safe-apps/SafeAppsSDKLink'
@@ -26,6 +27,9 @@ const SafeApps: NextPage = () => {
     [remoteSafeApps, pinnedSafeAppIds],
   )
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const onChangeQuery = useCallback(debounce(setQuery, 300), [])
+
   // Redirect to an individual safe app page if the appUrl is in the query params
   useEffect(() => {
     const appUrl = router.query.appUrl as string
@@ -49,7 +53,7 @@ const SafeApps: NextPage = () => {
       <main>
         {/* Safe Apps Filters */}
         <SafeAppsFilters
-          onChangeQuery={setQuery}
+          onChangeQuery={onChangeQuery}
           onChangeFilterCategory={setSelectedCategories}
           onChangeOptimizedWithBatch={setOptimizedWithBatchFilter}
           selectedCategories={selectedCategories}
